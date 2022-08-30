@@ -5,8 +5,8 @@ COPY . .
 RUN ls -ltra
 RUN cargo install --path=mimc-fast --force
 
-FROM rust:slim-bullseye as app
+FROM debian:bullseye as app
 RUN apt-get update
-COPY --from=builder /usr/local/cargo/bin/mimc-fast /usr/local/cargo/bin/mimc-fast
+COPY --from=builder /usr/local/cargo/bin/mimc-fast /usr/local/bin/mimc-fast
 ENV RUST_LOG=info
 ENTRYPOINT ["mimc-fast"]
